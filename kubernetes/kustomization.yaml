@@ -1,20 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: funstuff
+namespace: demos
 
 generatorOptions:
   disableNameSuffixHash: true
 
 commonLabels:
-  tekton.dev/task: ansible-kubernetes
+  tekton.dev/task: ansible-runner
 
-configMapGenerator:
-  - name: ansible-playbooks
-    files:
-      - example-playbooks/list-pods.yml
-      - example-playbooks/create-deployment.yml
-      - example-playbooks/create-service.yml
-      - example-playbooks/requirements.yml
 resources:
   - ansible-deployer.yaml
