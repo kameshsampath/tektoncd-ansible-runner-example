@@ -19,6 +19,7 @@ tkn task start git-clone \
   --workspace=name=output,claimName=ansible-playbooks \
   --param=url=https://github.com/kameshsampath/tektoncd-ansible-runner-example \
   --param=revision=master \
+  --param=deleteExisting=true \
   --showlog
 ```
 
