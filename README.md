@@ -25,6 +25,8 @@ tkn task start git-clone \
 
 ### Service Account
 
+You need proper RBAC in Kubernetes to allow it to perform the example tasks:
+
 ```shell
 kubectl apply -f  https://raw.githubusercontent.com/tektoncd-ansible-runner-example/master/kubernetes/ansible-deployer.yaml
 ```
@@ -43,19 +45,21 @@ kubectl apply -f  https://raw.githubusercontent.com/tektoncd-ansible-runner-exam
 ### Create Deployment
 
 ```shell
- tkn task start ansible-kubernetes \
+ tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=args=create-deployment.yml \
-   --workspace=name=playbook-directory,config=ansible-playbooks \
+   --param=project-dir=kubernetes \
+   --param=args='-p create-deployment.yml' \
+   --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
 
 ### Create Service
 
 ```shell
- tkn task start ansible-kubernetes \
+ tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=args=create-service.yml \
-   --workspace=name=playbook-directory,config=ansible-playbooks \
+   --param=project-dir=kubernetes \
+   --param=args='-p create-service.yml' \
+   --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
